@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Nicolas Petterson">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Decider</title>
+    <style>
+        .button {
+            background-color: grey;
+            border: none;
+            color: white;
+            padding: 10px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 24px;
+            margin: 3px;
+            width: 140px;
+        }
+        canvas {
+            /* float: right; */
+            width: 65%;
+        }
+        #candidates {
+            float: left;
+            width: 300px;
+        }
+        .selected {
+            background-color: limegreen;
+        }
+    </style>
+</head>
+<body>
+    <div id="candidates">
+        <button class="button">Amy</button>
+        <button class="button">Bill</button>
+        <button class="button">Cate</button>
+        <button class="button">Danny</button>
+        <button class="button">Evelyn</button>
+        <button class="button">Frank</button>
+        <button class="button">Greg</button>
+        <button class="button">Henry</button>
+        <button class="button">Irene</button>
+        <button class="button">Janni</button>
+    </div>
+        <canvas id="canvas" height="600" width="800"></canvas>
+    <script src='reviewers.js'></script>
+</body>
+</html>

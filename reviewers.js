@@ -65,7 +65,7 @@
                     currentWinner = wheelSlices[i];
                 }
             }
-            canvasContext.fillStyle = colors[i % candidates.length];
+            canvasContext.fillStyle = colors[i % candidates.length % colors.length];
             canvasContext.beginPath();
             // piece of cake... I mean, draw a piece of cake
             canvasContext.moveTo(centerX, centerY);

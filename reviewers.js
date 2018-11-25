@@ -1,5 +1,5 @@
 /*jslint for*/
-/*global window, document, setInterval, Audio*/
+/*global window, document, setInterval, setTimeout, Audio*/
 (function () {
     'use strict';
 
@@ -10,12 +10,13 @@
     var wheelSlices = [];
     var wheelSpeed = 1000;
     var wheelPosition = 0;
-    var WHEEL_FRICTION = 5;
+    var WHEEL_FRICTION = 3;
 
     var wheelRunning = false;
 
     var colors = ['purple', 'fuchsia', 'navy', 'blue', 'teal', 'aqua', 'green', 'lime', 'olive', 'yellow', 'maroon', 'red'];
     var currentWinner = '';
+    var click;
 
     function moveEverything() {
         if (!wheelRunning) {
@@ -64,7 +65,7 @@
                     currentWinner = wheelSlices[i];
                 }
             }
-            canvasContext.fillStyle = colors[i % colors.length];
+            canvasContext.fillStyle = colors[i % candidates.length];
             canvasContext.beginPath();
             // piece of cake... I mean, draw a piece of cake
             canvasContext.moveTo(centerX, centerY);
@@ -107,22 +108,35 @@
         }
     }
 
+    function playSound() {
+        if (wheelRunning) {
+            var sound = click.cloneNode(); // playing sound can overlap when cloning
+            sound.volume = 0.2;
+            sound.play();
+            setTimeout(playSound, Math.max(40000 / wheelSpeed, 80));
+        }
+    }
+
     window.onload = function () {
+        click = new Audio('click.mp3');
+
         canvas = document.getElementById('canvas');
         canvasContext = canvas.getContext('2d');
         canvasContext.font = "30px Arial";
 
-        var framesPerSecond = 60;
+        var framesPerSecond = 30;
         setInterval(function () {
             moveEverything();
             drawEverything();
-
         }, 1000 / framesPerSecond);
 
         canvas.addEventListener('mousedown', function () {
             wheelSpeed = 1000;
             wheelPosition = Math.random() * 30000;
             wheelRunning = true;
+            if (window.location.href.indexOf('nosound') === -1) {
+                playSound();
+            }
         });
 
         // add or remove candidates on button click
@@ -140,8 +154,10 @@
                     }
                 }
                 wheelSlices = [];
-                while (wheelSlices.length < 8) {
-                    wheelSlices = wheelSlices.concat(candidates);
+                if (candidates.length > 0) {
+                    while (wheelSlices.length < 8) {
+                        wheelSlices = wheelSlices.concat(candidates);
+                    }
                 }
             }
         }, false);

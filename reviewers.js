@@ -14,7 +14,7 @@
 
     var wheelRunning = false;
 
-    var colors = ['purple', 'fuchsia', 'navy', 'blue', 'teal', 'aqua', 'green', 'lime', 'olive', 'yellow', 'maroon', 'red'];
+    var colors = ['MediumAquamarine', '#B0E0E6', 'LightCoral', 'MediumTurquoise', 'SkyBlue', 'Moccasin'];
     var currentWinner = '';
     var click;
 
@@ -134,9 +134,12 @@
         canvas.addEventListener('mousedown', function () {
             wheelSpeed = 1000;
             wheelPosition = Math.random() * 30000;
-            wheelRunning = true;
-            if (window.location.href.indexOf('nosound') === -1) {
-                playSound();
+            if (!wheelRunning) {
+                wheelRunning = true;
+                // only play sound if we're not already running
+                if (window.location.href.indexOf('nosound') === -1) {
+                    playSound();
+                }
             }
         });
 

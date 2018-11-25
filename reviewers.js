@@ -98,6 +98,7 @@
             // draw arrow
             drawArrow();
         } else {
+            wheelRunning = false; // in case the last candidate was removed while running
             canvasContext.fillStyle = 'black';
             canvasContext.fillText('Choose candidates', canvas.width / 2, canvas.height / 2);
         }
